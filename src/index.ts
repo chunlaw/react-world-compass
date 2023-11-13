@@ -43,3 +43,29 @@ const useCompass = (interval: number = 20) => {
 };
 
 export default useCompass;
+
+export const requestPermission = (): Promise<"granted" | "denied" | "default"> => {
+  const ret = Promise.resolve("granted" as "granted" | "denied" | "default")
+  // @ts-ignore
+  if ( isSafari && typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent?.requestPermission === "function" ) {
+    // @ts-ignore
+    return DeviceOrientationEvent.requestPermission()
+  }
+  return ret
+}
+
+export const isSafari = (() => {
+  try {
+    return Boolean(
+      navigator &&
+        navigator.userAgent &&
+        navigator.userAgent.includes("Safari/") &&
+        !(
+          navigator.userAgent.includes("Chrome/") ||
+          navigator.userAgent.includes("Chromium/")
+        ),
+    );
+  } catch {
+    return false;
+  }
+})()

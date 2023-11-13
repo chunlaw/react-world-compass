@@ -16,7 +16,7 @@ npm install react-world-compass
 
 
 ```ts
-import useCompass from "react-world-compass"
+import useCompass, { requestPermission, isSafari } from "react-world-compass"
 ```
 
 `useCompass` is a React Hook that lets you obtain the real time degree absolute to the North.
@@ -27,6 +27,8 @@ function MyComponent() {
   // ...
 }
 ```
+
+For the Safari in iOS, you should call `requestPermission` through a **user event**, e.g., clicking a button box, before using `useCompass`.
 
 ## Paramenter
 - `interval`: The interval you want to capture the compass value. Type: `number`, default: `20` (i.e., 20ms)

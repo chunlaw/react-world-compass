@@ -32,4 +32,25 @@ const useCompass = (interval = 20) => {
     return alpha;
 };
 export default useCompass;
+export const requestPermission = () => {
+    const ret = Promise.resolve("granted");
+    // @ts-ignore
+    if (isSafari && typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent === null || DeviceOrientationEvent === void 0 ? void 0 : DeviceOrientationEvent.requestPermission) === "function") {
+        // @ts-ignore
+        return DeviceOrientationEvent.requestPermission();
+    }
+    return ret;
+};
+export const isSafari = (() => {
+    try {
+        return Boolean(navigator &&
+            navigator.userAgent &&
+            navigator.userAgent.includes("Safari/") &&
+            !(navigator.userAgent.includes("Chrome/") ||
+                navigator.userAgent.includes("Chromium/")));
+    }
+    catch (_a) {
+        return false;
+    }
+})();
 //# sourceMappingURL=index.js.map

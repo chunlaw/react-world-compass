@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isSafari = exports.requestPermission = void 0;
 const react_1 = require("react");
 const lodash_throttle_1 = __importDefault(require("lodash.throttle"));
 const useCompass = (interval = 20) => {
@@ -37,4 +38,26 @@ const useCompass = (interval = 20) => {
     return alpha;
 };
 exports.default = useCompass;
+const requestPermission = () => {
+    const ret = Promise.resolve("granted");
+    // @ts-ignore
+    if (exports.isSafari && typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent === null || DeviceOrientationEvent === void 0 ? void 0 : DeviceOrientationEvent.requestPermission) === "function") {
+        // @ts-ignore
+        return DeviceOrientationEvent.requestPermission();
+    }
+    return ret;
+};
+exports.requestPermission = requestPermission;
+exports.isSafari = (() => {
+    try {
+        return Boolean(navigator &&
+            navigator.userAgent &&
+            navigator.userAgent.includes("Safari/") &&
+            !(navigator.userAgent.includes("Chrome/") ||
+                navigator.userAgent.includes("Chromium/")));
+    }
+    catch (_a) {
+        return false;
+    }
+})();
 //# sourceMappingURL=index.js.map
