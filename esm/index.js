@@ -5,7 +5,7 @@ const useCompass = (interval = 20) => {
     const [alpha, setAlpha] = useState(null);
     const updateAlpha = useMemo(() => throttle((alpha) => {
         setAlpha(alpha);
-    }, Math.max(100, interval)), []);
+    }, Math.max(5, interval)), []);
     useEffect(() => {
         const el = (e) => {
             var _a;

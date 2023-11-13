@@ -15,14 +15,17 @@ npm install react-world-compass
 # Usage
 
 
-```
-import { useCompass } from "react-world-compass"
+```ts
+import useCompass from "react-world-compass"
 ```
 
 `useCompass` is a React Hook that lets you obtain the real time degree absolute to the North.
 
-```
-const degree = useCompass(interval)
+```ts
+function MyComponent() {
+  const degree = useCompass(interval)
+  // ...
+}
 ```
 
 ## Paramenter
@@ -30,8 +33,8 @@ const degree = useCompass(interval)
 
 ## Returns
 
-`useCompass` returns the degree absolute to the North, (i.e., 90 for East, 180 for South, and 270 for West).
+`useCompass()` returns the degree absolute to the North, (i.e., 90 for East, 180 for South, and 270 for West). If the device not support such feature, `null` value will be returned.
 
 # License
 
-MIT
+MIT License

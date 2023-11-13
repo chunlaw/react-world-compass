@@ -10,7 +10,7 @@ const useCompass = (interval = 20) => {
     const [alpha, setAlpha] = (0, react_1.useState)(null);
     const updateAlpha = (0, react_1.useMemo)(() => (0, lodash_throttle_1.default)((alpha) => {
         setAlpha(alpha);
-    }, Math.max(100, interval)), []);
+    }, Math.max(5, interval)), []);
     (0, react_1.useEffect)(() => {
         const el = (e) => {
             var _a;

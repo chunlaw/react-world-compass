@@ -11,7 +11,7 @@ const useCompass = (interval: number = 20) => {
         (alpha: number | null) => {
           setAlpha(alpha);
         },
-        Math.max(100, interval)
+        Math.max(5, interval)
       ),
     []
   );
