@@ -1,5 +1,7 @@
 # React World Compass
 
+[Demo](https://react-world-compass.chunlaw.io)
+
 The react package is to provide a `useCompass` function to obtain the absolute orientation of the device. The package use the device event `deviceorientationabsolute` for Chrome/Edge in Android and `webkitCompassHeading` for Safari in iOS. Sorry to Firefox.
 
 # Installation
