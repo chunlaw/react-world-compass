@@ -1,0 +1,28 @@
+{
+  "name": "react-world-compass",
+  "version": "1.0.0",
+  "description": "React package to reture the real time orientation of the device.",
+  "main": "dist/index.js",
+  "repository": "https://github.com/chunlaw/react-world-compass",
+  "author": "Law Wai Chun <chunlaw@rocketmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean",
+    "build:esm": "tsc --target es2018 --outDir esm",
+    "build:cjs": "tsc --target es2015 --module commonjs --outDir dist",
+    "build": "yarn build:cjs && yarn build:esm",
+    "prepublish": "yarn build",
+    "publish": "npm publish"
+  },
+  "devDependencies": {
+    "@types/lodash.throttle": "^4.1.9",
+    "@types/react": "^18.2.37",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "lodash.throttle": "^4.1.1",
+    "react": "^18.2.0"
+  }
+}
