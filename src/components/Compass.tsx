@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import useCompass from "react-world-compass";
 
 const Compass = () => {
-  const deg = useCompass();
+  const deg = useCompass(100);
 
   return (
     <Box flex="1" display="flex" alignItems="center" justifyContent="center">
@@ -16,9 +16,10 @@ const Compass = () => {
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            transform: `rotate(${deg?.toFixed(1)}deg)`,
+            transform: `rotate(${deg?.toFixed(3)}deg)`,
             height: "min(100dvw, 100dvh)",
             width: "min(100dvw, 100dvh)",
+            transition: 'transform 0.2s ease-out'
           }}
         />
       )}
