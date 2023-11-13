@@ -22,7 +22,7 @@ const useCompass = (interval: number = 20) => {
       // @ts-ignore
       if (typeof e.webkitCompassHeading !== "undefined") {
         // @ts-ignore
-        updateAlpha(e.webkitCompassHeading ?? null);
+        updateAlpha(360 - e.webkitCompassHeading);
       } else if (e.absolute === absolute.current) {
         updateAlpha(e.alpha);
       }

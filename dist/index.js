@@ -14,13 +14,12 @@ const useCompass = (interval = 20) => {
     }, Math.max(5, interval)), []);
     (0, react_1.useEffect)(() => {
         const el = (e) => {
-            var _a;
             if (e.absolute)
                 absolute.current = true;
             // @ts-ignore
             if (typeof e.webkitCompassHeading !== "undefined") {
                 // @ts-ignore
-                updateAlpha((_a = e.webkitCompassHeading) !== null && _a !== void 0 ? _a : null);
+                updateAlpha(360 - e.webkitCompassHeading);
             }
             else if (e.absolute === absolute.current) {
                 updateAlpha(e.alpha);
