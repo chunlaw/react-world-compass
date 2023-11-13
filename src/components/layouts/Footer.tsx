@@ -7,7 +7,7 @@ const Footer = () => {
       <IconButton
         onClick={() => {
           window.open(
-            "https://github.com/chunlaw/react-static-site-template",
+            "https://github.com/chunlaw/react-world-compass",
             "_blank"
           );
         }}
@@ -22,6 +22,7 @@ const Footer = () => {
 export default Footer;
 
 const rootSx: SxProps<Theme> = {
+  height: 50,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

@@ -1,15 +1,15 @@
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
 const Layout = () => {
   return (
-    <Container fixed maxWidth="md">
+    <Box height="100dvh" width="100dvw" display="flex" flexDirection="column">
       <Header />
       <Outlet />
       <Footer />
-    </Container>
+    </Box>
   );
 };
 
