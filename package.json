@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "React package to reture the real time orientation of the device.",
   "main": "dist/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "dist",
+    "esm",
+    "src"
+  ],
   "repository": "https://github.com/chunlaw/react-world-compass",
   "author": "Law Wai Chun <chunlaw@rocketmail.com>",
   "license": "MIT",
@@ -24,5 +30,10 @@
   "dependencies": {
     "lodash.throttle": "^4.1.1",
     "react": "^18.2.0"
-  }
+  },
+  "keywords": ["react", "orientation", "compass", "world compass", "device orientation", "absolute orientation"],
+  "bugs": {
+    "url": "https://github.com/hkbus/react-world-compass/issues"
+  },
+  "homepage": "https://react-world-compass.chunlaw.io"
 }
