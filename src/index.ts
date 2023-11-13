@@ -1,15 +1,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import throttle from "lodash.throttle";
 
+export type DeviceOrientationPermission = "granted" | "denied" | "default"
+
+export type OrientationState = {
+  degree: number,
+  accuracy: number,
+}
+
 const useCompass = (interval: number = 20) => {
   const absolute = useRef<boolean>(false);
-  const [alpha, setAlpha] = useState<number | null>(null);
+  const [state, setState] = useState<OrientationState | null>(null);
 
   const updateAlpha = useMemo(
     () =>
       throttle(
-        (alpha: number | null) => {
-          setAlpha(alpha);
+        (_state: OrientationState | null) => {
+          setState(_state);
         },
         Math.max(5, interval)
       ),
@@ -22,9 +29,9 @@ const useCompass = (interval: number = 20) => {
       // @ts-ignore
       if (typeof e.webkitCompassHeading !== "undefined") {
         // @ts-ignore
-        updateAlpha(360 - e.webkitCompassHeading);
+        updateAlpha({degree: 360 - e.webkitCompassHeading, accuracy: e.webkitCompassAccuracy});
       } else if (e.absolute === absolute.current) {
-        updateAlpha(e.alpha);
+        updateAlpha(e.alpha ? {degree: e.alpha, accuracy: 0}: null);
       }
     };
 
@@ -39,13 +46,13 @@ const useCompass = (interval: number = 20) => {
     };
   }, []);
 
-  return alpha;
+  return state;
 };
 
 export default useCompass;
 
-export const requestPermission = (): Promise<"granted" | "denied" | "default"> => {
-  const ret = Promise.resolve("granted" as "granted" | "denied" | "default")
+export const requestPermission = (): Promise<DeviceOrientationPermission> => {
+  const ret = Promise.resolve("granted" as DeviceOrientationPermission)
   // @ts-ignore
   if ( isSafari && typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent?.requestPermission === "function" ) {
     // @ts-ignore
@@ -54,7 +61,7 @@ export const requestPermission = (): Promise<"granted" | "denied" | "default"> =
   return ret
 }
 
-export const isSafari = (() => {
+export const isSafari: boolean = (() => {
   try {
     return Boolean(
       navigator &&

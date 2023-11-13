@@ -2,9 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import throttle from "lodash.throttle";
 const useCompass = (interval = 20) => {
     const absolute = useRef(false);
-    const [alpha, setAlpha] = useState(null);
-    const updateAlpha = useMemo(() => throttle((alpha) => {
-        setAlpha(alpha);
+    const [state, setState] = useState(null);
+    const updateAlpha = useMemo(() => throttle((_state) => {
+        setState(_state);
     }, Math.max(5, interval)), []);
     useEffect(() => {
         const el = (e) => {
@@ -13,10 +13,10 @@ const useCompass = (interval = 20) => {
             // @ts-ignore
             if (typeof e.webkitCompassHeading !== "undefined") {
                 // @ts-ignore
-                updateAlpha(360 - e.webkitCompassHeading);
+                updateAlpha({ degree: 360 - e.webkitCompassHeading, accuracy: e.webkitCompassAccuracy });
             }
             else if (e.absolute === absolute.current) {
-                updateAlpha(e.alpha);
+                updateAlpha(e.alpha ? { degree: e.alpha, accuracy: 0 } : null);
             }
         };
         // @ts-ignore
@@ -28,7 +28,7 @@ const useCompass = (interval = 20) => {
             window.removeEventListener("deviceorientation", el);
         };
     }, []);
-    return alpha;
+    return state;
 };
 export default useCompass;
 export const requestPermission = () => {

@@ -8,9 +8,9 @@ const react_1 = require("react");
 const lodash_throttle_1 = __importDefault(require("lodash.throttle"));
 const useCompass = (interval = 20) => {
     const absolute = (0, react_1.useRef)(false);
-    const [alpha, setAlpha] = (0, react_1.useState)(null);
-    const updateAlpha = (0, react_1.useMemo)(() => (0, lodash_throttle_1.default)((alpha) => {
-        setAlpha(alpha);
+    const [state, setState] = (0, react_1.useState)(null);
+    const updateAlpha = (0, react_1.useMemo)(() => (0, lodash_throttle_1.default)((_state) => {
+        setState(_state);
     }, Math.max(5, interval)), []);
     (0, react_1.useEffect)(() => {
         const el = (e) => {
@@ -19,10 +19,10 @@ const useCompass = (interval = 20) => {
             // @ts-ignore
             if (typeof e.webkitCompassHeading !== "undefined") {
                 // @ts-ignore
-                updateAlpha(360 - e.webkitCompassHeading);
+                updateAlpha({ degree: 360 - e.webkitCompassHeading, accuracy: e.webkitCompassAccuracy });
             }
             else if (e.absolute === absolute.current) {
-                updateAlpha(e.alpha);
+                updateAlpha(e.alpha ? { degree: e.alpha, accuracy: 0 } : null);
             }
         };
         // @ts-ignore
@@ -34,7 +34,7 @@ const useCompass = (interval = 20) => {
             window.removeEventListener("deviceorientation", el);
         };
     }, []);
-    return alpha;
+    return state;
 };
 exports.default = useCompass;
 const requestPermission = () => {
