@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import useCompass from "../hooks/useCompass";
+import useCompass from "react-world-compass";
 
 const Compass = () => {
   const deg = useCompass();
