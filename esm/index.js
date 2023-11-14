@@ -16,7 +16,7 @@ const useCompass = (interval = 20) => {
                 updateAlpha({ degree: 360 - e.webkitCompassHeading, accuracy: e.webkitCompassAccuracy });
             }
             else if (e.absolute === absolute.current) {
-                updateAlpha(e.alpha ? { degree: e.alpha, accuracy: 0 } : null);
+                updateAlpha(e.alpha !== null ? { degree: e.alpha, accuracy: 0 } : null);
             }
         };
         // @ts-ignore

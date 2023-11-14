@@ -31,7 +31,7 @@ const useCompass = (interval: number = 20) => {
         // @ts-ignore
         updateAlpha({degree: 360 - e.webkitCompassHeading, accuracy: e.webkitCompassAccuracy});
       } else if (e.absolute === absolute.current) {
-        updateAlpha(e.alpha ? {degree: e.alpha, accuracy: 0}: null);
+        updateAlpha(e.alpha !== null ? {degree: e.alpha, accuracy: 0}: null);
       }
     };
 
