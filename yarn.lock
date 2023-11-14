@@ -1888,10 +1888,10 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-world-compass@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-world-compass/-/react-world-compass-1.1.0.tgz#f220e09ad0486c89a5e134280ad472f5c756d7db"
-  integrity sha512-vRSUybuEHjGhJiJfjFiD7Cow9aSwOvPMP1qiQfPS5caf8nD2IlLE+JaMA5m8j5hsGM+CE/Zr6bcz2WnasxhGFA==
+react-world-compass@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-world-compass/-/react-world-compass-1.1.1.tgz#34c65fa66981bdfbd9db18820bbbaccfe3b33f91"
+  integrity sha512-oqkjm40i0qqetcL3tbyafRJW8yNPSORuBQhdAhSKdbJjh51Q4rC3flBd2HpQqfjawRBPqaYfg4ELlRtiCHislg==
   dependencies:
     lodash.throttle "^4.1.1"
     react "^18.2.0"
