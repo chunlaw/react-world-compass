@@ -1,6 +1,10 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useState } from "react";
-import useCompass, { requestPermission, isSafari } from "react-world-compass";
+import { useEffect, useState } from "react";
+import useCompass, {
+  requestPermission,
+  isSafari,
+  OrientationState,
+} from "react-world-compass";
 
 const CompassWrapper = () => {
   const [permission, setPermission] = useState("default");
@@ -24,7 +28,23 @@ const CompassWrapper = () => {
 };
 
 const Compass = () => {
-  const compass = useCompass(100);
+  const _compass = useCompass(100);
+  const [compass, setCompass] = useState<OrientationState | null>(null);
+
+  // capture degree from react-native if possible
+  useEffect(() => {
+    const elf = (nativeEvent: any) => {
+      setCompass(JSON.parse(nativeEvent.data));
+    };
+    window.addEventListener("message", elf);
+    return () => {
+      window.removeEventListener("message", elf);
+    };
+  }, []);
+
+  useEffect(() => {
+    setCompass(_compass);
+  }, [_compass]);
 
   return (
     <Box
